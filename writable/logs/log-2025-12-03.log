@@ -3,3 +3,7 @@ DEBUG - 2025-12-03 13:32:59 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-12-03 13:33:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-12-03 13:33:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-12-03 13:33:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-12-03 13:54:06 --> ErrorException: Access level to App\Controllers\Test::responseJSON() must be protected (as in class App\Controllers\BaseController) or weaker
+[Method: GET, Route: api/test/books]
+in APPPATH\Controllers\Test.php on line 114.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()

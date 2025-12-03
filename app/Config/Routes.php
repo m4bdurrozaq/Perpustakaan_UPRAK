@@ -21,7 +21,7 @@ $routes->post('auth/logout', 'Auth::logout');
 $routes->get('auth/logout', 'Auth::logout'); // Support GET juga untuk fallback
 $routes->get('auth/check', 'Auth::checkAuth');
 $routes->get('debug/session', function() {
-return session()->get();
+    d(session()->get()); // Ganti dengan d() untuk debug yang lebih baik
 });
 
 // Register
@@ -35,19 +35,24 @@ $routes->post('books', 'Books::create');
 $routes->put('books/(:num)', 'Books::update/$1');
 $routes->delete('books/(:num)', 'Books::delete/$1');
 
-// Atau pakai resource routes (lebih simple)
-// $routes->resource('books');
+// Testing routes - PERBAIKI ROUTE 'test'
+$routes->get('test', 'Test::index'); // <-- PERUBAHAN PENTING: arahkan ke Test controller
+$routes->get('test/json', 'Test::index'); // Atau buat route khusus
 
-// Testing routes
-$routes->get('test', function() {
-    return "Test route berhasil!";
-});
+// TEST API ROUTES
 $routes->get('api/test/users', 'Test::users');
+$routes->get('api/test/books', 'Test::books');
 
-$routes->get('test/json', function() {
-    $response = service('response');
-    return $response->setJSON([
+// Fallback untuk testing
+$routes->get('api/test', function() {
+    return service('response')->setJSON([
         'status' => 'success',
-        'message' => 'Test API berhasil!'
+        'message' => 'Test API berhasil!',
+        'available_endpoints' => [
+            '/test' => 'Database connection test',
+            '/api/test/users' => 'Get users data',
+            '/api/test/books' => 'Get books data',
+            '/test/json' => 'JSON test'
+        ]
     ]);
 });
